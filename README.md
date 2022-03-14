@@ -1,5 +1,7 @@
 # FoodPlannerCalendar
+
 Food Planner Calendar App
+
 My wife and I like to plan our dinners for a week at a time. 
 This can sometimes prove to be a tiring task, and as such, I wanted to make an application that can generate such a plan for us.
 
