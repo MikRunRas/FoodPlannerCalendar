@@ -3,10 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/nav_home">
+
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/nav_home"
         android:name="com.example.foodplannercalendar.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_calendar"
+        android:name="com.example.foodplannercalendar.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/nav_shoppinglist"
+        android:name="com.example.foodplannercalendar.ShoppinglistFragment"
+        android:label="fragment_shoppinglist"
+        tools:layout="@layout/fragment_shoppinglist" />
+
 </navigation>

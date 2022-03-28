@@ -1,8 +1,42 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-    <group android:id="@+id/other">
+    <group android:id="@+id/data">
+        <item
+            android:id="@+id/nav_moves"
+            android:icon="@drawable/ic_settings"
+            android:title="hello" />
+        <item
+            android:id="@+id/nav_abilities"
+            android:icon="@drawable/ic_settings"
+            android:title="hello" />
+        <item
+            android:id="@+id/nav_items"
+            android:icon="@drawable/ic_settings"
+            android:title="hello" />
+        <item
+            android:id="@+id/nav_locations"
+            android:icon="@drawable/ic_settings"
+            android:title="hello" />
+        <item
+            android:id="@+id/nav_natures"
+            android:icon="@drawable/ic_settings"
+            android:title="hello" />
 
+    </group>
+    <group android:id="@+id/tools">
+
+        <item
+            android:id="@+id/nav_type_chart"
+            android:icon="@drawable/ic_settings"
+            android:title="hello" />
+
+        <item
+            android:id="@+id/nav_iv_calculator"
+            android:icon="@drawable/ic_settings"
+            android:title="hello" />
+    </group>
+    <group android:id="@+id/other">
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"

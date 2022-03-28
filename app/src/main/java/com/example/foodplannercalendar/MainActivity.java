@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private void setBottomNavigationVisibility() {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             final int id = destination.getId();
-            if (id == R.id.homeFragment || id == R.id.nav_calendar || id == R.id.nav_shoppinglist) {
+            if (id == R.id.nav_home || id == R.id.nav_calendar || id == R.id.nav_shoppinglist) {
                 bottomNavigationView.setVisibility(View.VISIBLE);
             } else {
                 bottomNavigationView.setVisibility(View.GONE);
