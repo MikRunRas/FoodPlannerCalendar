@@ -8,12 +8,12 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.foodplannercalendar.HomeFragment"
-        android:label="fragment_home"
+        android:label="Home page"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_calendar"
         android:name="com.example.foodplannercalendar.CalendarFragment"
-        android:label="fragment_calendar"
+        android:label="My Calendar"
         tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/nav_shoppinglist"
