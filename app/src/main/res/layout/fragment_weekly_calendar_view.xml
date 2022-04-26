@@ -4,18 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CalendarFragment">
-
-    <Button
-        android:id="@+id/weeklyViewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/white"
-        android:text="Weekly"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
+    tools:context=".WeeklyCalendarViewFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +14,7 @@
         android:layout_marginTop="20dp">
 
         <Button
-            android:id="@+id/previousMonthButton"
+            android:id="@+id/previousWeekButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -47,7 +36,7 @@
 
 
         <Button
-            android:id="@+id/nextMonthButton"
+            android:id="@+id/nextWeekButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -133,9 +122,26 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendarRecylcerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="80dp">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/newEventButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:text="New event"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_gravity="center"/>
+
+    <ListView
+        android:id="@+id/eventListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"></ListView>
 
 </LinearLayout>

@@ -21,9 +21,14 @@
         android:label="My Shoppinglist"
         tools:layout="@layout/fragment_shoppinglist" />
     <fragment
-        android:id="@+id/createEventFragment"
-        android:name="com.example.foodplannercalendar.CreateEventFragment"
-        android:label="fragment_create_event"
-        tools:layout="@layout/fragment_create_event" />
+        android:id="@+id/eventEditFragment"
+        android:name="com.example.foodplannercalendar.EventEditFragment"
+        android:label="fragment_event_edit"
+        tools:layout="@layout/fragment_event_edit" />
+    <fragment
+        android:id="@+id/weeklyCalendarViewFragment"
+        android:name="com.example.foodplannercalendar.WeeklyCalendarViewFragment"
+        android:label="fragment_weekly_calendar_view"
+        tools:layout="@layout/fragment_weekly_calendar_view" />
 
 </navigation>

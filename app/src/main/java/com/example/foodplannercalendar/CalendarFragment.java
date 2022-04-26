@@ -1,5 +1,9 @@
 package com.example.foodplannercalendar;
 
+import static com.example.foodplannercalendar.CalendarUtils.daysInMonthArray;
+import static com.example.foodplannercalendar.CalendarUtils.monthYearFromDate;
+import static com.example.foodplannercalendar.CalendarUtils.selectedDate;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +11,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -41,9 +47,9 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
-    private LocalDate selectedDate;
     private Button nextMonthButton;
     private Button previousMonthButton;
+    private Button weeklyViewButton;
     private TextView cellDay;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +59,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         selectedDate = LocalDate.now();
         nextMonthButton = root.findViewById(R.id.nextMonthButton);
         previousMonthButton = root.findViewById(R.id.previousMonthButton);
+        weeklyViewButton = root.findViewById(R.id.weeklyViewButton);
         cellDay = root.findViewById(R.id.cellDayText);
         setMonthView();
 
@@ -65,6 +72,15 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             selectedDate = selectedDate.minusMonths(1);
             setMonthView();
         });
+
+        weeklyViewButton.setOnClickListener(view -> {
+            Fragment frag = new WeeklyCalendarViewFragment();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.nav_host_fragment, frag);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(null);
+            ft.commit();
+        });
         return root;
     }
 
@@ -72,7 +88,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     {
         String str = monthYearFromDate(selectedDate);
         monthYearText.setText(str.substring(0, 1).toUpperCase() + str.substring(1));
-        ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
+        ArrayList<LocalDate> daysInMonth = daysInMonthArray(selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
@@ -80,40 +96,12 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
-    private ArrayList<String> daysInMonthArray(LocalDate date)
+    public void onItemClick(int position, LocalDate date)
     {
-        ArrayList<String> daysInMonthArray = new ArrayList<>();
-        YearMonth yearMonth = YearMonth.from(date);
-
-        int daysInMonth = yearMonth.lengthOfMonth();
-
-        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
-        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
-
-        for (int i = 1 ; i <= 42; i++)
+        if(date != null)
         {
-            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek)
-            {
-                daysInMonthArray.add("");
-            }
-            else
-            {
-                daysInMonthArray.add(String.valueOf(i - dayOfWeek));
-            }
+            selectedDate = date;
+            setMonthView();
         }
-        return daysInMonthArray;
-    }
-
-    private String monthYearFromDate(LocalDate date)
-    {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-        return date.format(formatter);
-    }
-
-    public void onItemClick(int position, String dayText)
-    {
-            String message = "Selected date " + dayText + " " + monthYearFromDate(selectedDate);
-            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-            Log.d("hello", message);
     }
 }
