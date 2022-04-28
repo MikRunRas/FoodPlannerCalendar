@@ -1,4 +1,4 @@
-package com.example.foodplannercalendar;
+package com.example.foodplannercalendar.shoppinglist;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

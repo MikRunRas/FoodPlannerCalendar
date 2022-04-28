@@ -1,56 +1,43 @@
-package com.example.foodplannercalendar;
+package com.example.foodplannercalendar.calendar;
 
-import static com.example.foodplannercalendar.CalendarUtils.daysInMonthArray;
-import static com.example.foodplannercalendar.CalendarUtils.monthYearFromDate;
-import static com.example.foodplannercalendar.CalendarUtils.selectedDate;
+import static com.example.foodplannercalendar.calendar.CalendarUtils.daysInMonthArray;
+import static com.example.foodplannercalendar.calendar.CalendarUtils.monthYearFromDate;
+import static com.example.foodplannercalendar.calendar.CalendarUtils.selectedDate;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.foodplannercalendar.R;
+import com.example.foodplannercalendar.event.Event;
+import com.example.foodplannercalendar.event.EventAdapter;
+import com.example.foodplannercalendar.event.EventEditFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.w3c.dom.Text;
-
 import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
 
 public class CalendarFragment extends Fragment implements CalendarAdapter.OnItemListener {
 
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
-    private Button nextMonthButton;
-    private Button previousMonthButton;
-    private Button weeklyViewButton;
+    private ImageButton nextMonthButton;
+    private ImageButton previousMonthButton;
+    private FloatingActionButton newEventButton;
     private TextView cellDay;
+    private ListView eventListView;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_calendar, container, false);
@@ -59,8 +46,9 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         selectedDate = LocalDate.now();
         nextMonthButton = root.findViewById(R.id.nextMonthButton);
         previousMonthButton = root.findViewById(R.id.previousMonthButton);
-        weeklyViewButton = root.findViewById(R.id.weeklyViewButton);
+        newEventButton = root.findViewById(R.id.newEventButton);
         cellDay = root.findViewById(R.id.cellDayText);
+        eventListView = root.findViewById(R.id.eventListView);
         setMonthView();
 
         nextMonthButton.setOnClickListener(view -> {
@@ -73,8 +61,8 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             setMonthView();
         });
 
-        weeklyViewButton.setOnClickListener(view -> {
-            Fragment frag = new WeeklyCalendarViewFragment();
+        newEventButton.setOnClickListener(view -> {
+            Fragment frag = new EventEditFragment();
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.nav_host_fragment, frag);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -94,6 +82,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
+        setEventAdapter();
     }
 
     public void onItemClick(int position, LocalDate date)
@@ -103,5 +92,19 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             selectedDate = date;
             setMonthView();
         }
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        setEventAdapter();
+    }
+
+    private void setEventAdapter()
+    {
+        ArrayList<Event> dailyEvents = Event.eventsForDate(selectedDate);
+        EventAdapter eventAdapter = new EventAdapter(getContext(), dailyEvents);
+        eventListView.setAdapter(eventAdapter);
     }
 }

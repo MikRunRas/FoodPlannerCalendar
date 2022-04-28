@@ -1,4 +1,4 @@
-package com.example.foodplannercalendar;
+package com.example.foodplannercalendar.event;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.foodplannercalendar.R;
+import com.example.foodplannercalendar.calendar.CalendarUtils;
 
 import java.util.List;
 

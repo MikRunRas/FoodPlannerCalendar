@@ -1,4 +1,4 @@
-package com.example.foodplannercalendar;
+package com.example.foodplannercalendar.calendar;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

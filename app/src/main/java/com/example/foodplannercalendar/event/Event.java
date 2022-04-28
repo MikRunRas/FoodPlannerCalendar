@@ -1,4 +1,4 @@
-package com.example.foodplannercalendar;
+package com.example.foodplannercalendar.event;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

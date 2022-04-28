@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".HomeFragment">
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,18 +13,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Todays date is:"
+            android:textSize="20sp"
             android:layout_weight="1"
             android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/dateTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="date"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:gravity="center|top"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Todays meal is:"
+            android:textSize="20sp"
             android:layout_weight="1"
             android:layout_gravity="center"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MEAL"
+            android:textSize="20sp"
             android:layout_weight="1"
             android:layout_gravity="center"/>
 
@@ -33,4 +45,4 @@
             android:layout_gravity="center"
             android:text="SHOW ME THE RECIPE" />
     </LinearLayout>
-</FrameLayout>
+</LinearLayout>

@@ -1,10 +1,12 @@
-package com.example.foodplannercalendar;
+package com.example.foodplannercalendar.calendar;
 
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.foodplannercalendar.R;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,4 +33,6 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.
     {
         onItemListener.onItemClick(getAbsoluteAdapterPosition(), days.get(getAdapterPosition()));
     }
+
+
 }

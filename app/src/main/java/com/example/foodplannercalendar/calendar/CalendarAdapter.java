@@ -1,4 +1,4 @@
-package com.example.foodplannercalendar;
+package com.example.foodplannercalendar.calendar;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.foodplannercalendar.R;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,16 +31,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-        if(days.size() > 15)
-        {
-            layoutParams.height = (int) (parent.getHeight() * 0.1666666);
-        }
-        else
-        {
-            layoutParams.height = (int) (parent.getHeight());
-        }
-
-
+        layoutParams.height = (int) (parent.getHeight() * 0.1666666);
         return new CalendarViewHolder(view, onItemListener, days);
     }
 

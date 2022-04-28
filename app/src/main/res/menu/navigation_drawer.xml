@@ -19,9 +19,9 @@
             android:icon="@drawable/ic_settings"
             android:title="hello" />
         <item
-            android:id="@+id/nav_natures"
-            android:icon="@drawable/ic_settings"
-            android:title="hello" />
+            android:onClick="logOut"
+            android:icon="@drawable/ic_baseline_lock_open_24"
+            android:title="Log out" />
 
     </group>
     <group android:id="@+id/tools">

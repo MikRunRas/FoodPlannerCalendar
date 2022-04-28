@@ -1,4 +1,4 @@
-package com.example.foodplannercalendar;
+package com.example.foodplannercalendar.shoppinglist;
 
 import android.content.Context;
 

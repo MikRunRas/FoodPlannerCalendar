@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".WeeklyCalendarViewFragment">
+    tools:context=".calendar.WeeklyCalendarViewFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,16 +13,13 @@
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp">
 
-        <Button
+        <ImageButton
             android:id="@+id/previousWeekButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            android:text="@string/backward"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:src="@drawable/ic_baseline_chevron_left_24"/>
 
         <TextView
             android:id="@+id/monthYearTextView"
@@ -35,16 +32,13 @@
             android:layout_height="wrap_content"/>
 
 
-        <Button
+        <ImageButton
             android:id="@+id/nextWeekButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            android:text="@string/forward"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:src="@drawable/ic_baseline_chevron_right_24"/>
 
     </LinearLayout>
 

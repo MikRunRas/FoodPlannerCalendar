@@ -12,22 +12,22 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_calendar"
-        android:name="com.example.foodplannercalendar.CalendarFragment"
+        android:name="com.example.foodplannercalendar.calendar.CalendarFragment"
         android:label="My Calendar"
         tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/nav_shoppinglist"
-        android:name="com.example.foodplannercalendar.ShoppinglistFragment"
+        android:name="com.example.foodplannercalendar.shoppinglist.ShoppinglistFragment"
         android:label="My Shoppinglist"
         tools:layout="@layout/fragment_shoppinglist" />
     <fragment
         android:id="@+id/eventEditFragment"
-        android:name="com.example.foodplannercalendar.EventEditFragment"
+        android:name="com.example.foodplannercalendar.event.EventEditFragment"
         android:label="fragment_event_edit"
         tools:layout="@layout/fragment_event_edit" />
     <fragment
         android:id="@+id/weeklyCalendarViewFragment"
-        android:name="com.example.foodplannercalendar.WeeklyCalendarViewFragment"
+        android:name="com.example.foodplannercalendar.calendar.WeeklyCalendarViewFragment"
         android:label="fragment_weekly_calendar_view"
         tools:layout="@layout/fragment_weekly_calendar_view" />
 
