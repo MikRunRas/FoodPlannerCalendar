@@ -25,7 +25,6 @@ public class ShoppingListItemRepository {
     public static synchronized ShoppingListItemRepository getInstance(Application application) {
         if (instance == null)
             instance = new ShoppingListItemRepository(application);
-
         return instance;
     }
 

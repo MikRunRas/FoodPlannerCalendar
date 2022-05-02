@@ -35,30 +35,34 @@ public class ShoppinglistFragment extends Fragment {
     private ShoppingListAdapter shoppingListAdapter;
     private InBasketListAdapter basketListAdapter;
     private ShoppinglistFragmentViewModel viewModel;
+    private int test = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         viewModel = new ViewModelProvider(this).get(ShoppinglistFragmentViewModel.class);
         View root = inflater.inflate(R.layout.fragment_shoppinglist, container, false);
 
+
         fab = root.findViewById(R.id.FloatingActionButton);
         fabd = root.findViewById(R.id.FloatingActionButtond);
         editText1 = root.findViewById(R.id.EditText);
         editText2 = root.findViewById(R.id.EditText2);
 
-        viewModel.getAllShoppingListItems().observe(this, tempItems-> {
-            if(!tempItems.isEmpty()){
-                for (ShoppingListItem i : tempItems) {
-                    if (i.getIsBought() == false) {
-                        items.add(new ShoppingListItem(i.getTitle(), i.getAmount(), i.getIsBought()));
-                    } else if (i.getIsBought() == true) {
-                        boughtItems.add(new ShoppingListItem(i.getTitle(), i.getAmount(), i.getIsBought()));
+        viewModel.getAllShoppingListItems().observe(getViewLifecycleOwner(), tempItems-> {
+            if(!tempItems.isEmpty()) {
+                items.clear();
+                boughtItems.clear();
+                    for (ShoppingListItem i : tempItems) {
+                        if(i.getIsBought() == false) {
+                            items.add(i);
+                        }
+                        else if(i.getIsBought() == true){
+                            boughtItems.add(i);
+                        }
                     }
+                    shoppingListAdapter.notifyDataSetChanged();
+                    basketListAdapter.notifyDataSetChanged();
                 }
-            } else {
-
-            }
-            shoppingListAdapter.notifyDataSetChanged();
         });
 
         fab.setOnClickListener(view -> {
@@ -80,11 +84,9 @@ public class ShoppinglistFragment extends Fragment {
             }
         });
 
-        fabd.setOnClickListener(view ->{
+        fabd.setOnClickListener(view -> {
             viewModel.deleteAllShoppingListItems();
-            shoppingListAdapter.notifyDataSetChanged();
         });
-
         return root;
     }
 
@@ -106,8 +108,8 @@ public class ShoppinglistFragment extends Fragment {
             items.remove(item);
             item.setIsBought(item);
             boughtItems.add(item);
-            viewModel.update(item.ID, item.getIsBought());
-            Log.d("ISBOUGHT", "IsBought value: " + item.getIsBought());
+            viewModel.delete(item);
+            viewModel.insert(item);
             shoppingListAdapter.notifyDataSetChanged();
             basketListAdapter.notifyDataSetChanged();
         });
@@ -116,20 +118,17 @@ public class ShoppinglistFragment extends Fragment {
             boughtItems.remove(boughtItem);
             boughtItem.setIsBought(boughtItem);
             items.add(boughtItem);
-            viewModel.update(boughtItem.ID, boughtItem.getIsBought());
-            Log.d("ISNULL", "IsBought value: " + boughtItem.getIsBought());
-            viewModel.update(boughtItem.ID, boughtItem.getIsBought());
+            viewModel.delete(boughtItem);
+            viewModel.insert(boughtItem);
             basketListAdapter.notifyDataSetChanged();
             shoppingListAdapter.notifyDataSetChanged();
         });
         itemList.setAdapter(shoppingListAdapter);
         boughtItemsList.setAdapter(basketListAdapter);
     }
-
     public void clearLists(){
-        items.clear();
+        ShoppinglistFragment shoppinglistFragment = new ShoppinglistFragment();
+        shoppinglistFragment.items.clear();
         boughtItems.clear();
-        basketListAdapter.notifyDataSetChanged();
-        shoppingListAdapter.notifyDataSetChanged();
     }
 }

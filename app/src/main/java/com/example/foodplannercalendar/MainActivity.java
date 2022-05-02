@@ -15,9 +15,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
 import com.example.foodplannercalendar.shoppinglist.ShoppingListItem;
 import com.example.foodplannercalendar.shoppinglist.ShoppinglistFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -117,14 +114,6 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
     }
 
-    public void ClearList(MenuItem item) {
-        ShoppinglistFragment fragment = (ShoppinglistFragment) getSupportFragmentManager().findFragmentById(R.id.shoppingListFragment);
-        if (fragment != null) {
-            fragment.clearLists();
-        } else
-                Log.d("ISNULL", "Shopping List Fragment: NULL");
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -138,5 +127,11 @@ public class MainActivity extends AppCompatActivity {
     public void logOut(MenuItem item) {
         mAuth.signOut();
         startActivity( new Intent(MainActivity.this, LoginActivity.class));
+    }
+
+    public void ClearList(MenuItem item)
+    {
+        ShoppinglistFragment fragment = (ShoppinglistFragment) getSupportFragmentManager().findFragmentById(R.id.shoppingListFragment);
+        fragment.clearLists();
     }
 }
