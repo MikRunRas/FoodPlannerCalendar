@@ -20,8 +20,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     private OnClickListener onClickListener;
 
     ShoppingListAdapter(ArrayList<ShoppingListItem> items) { this.items = items; }
-
-
+    
     public void setOnClickListener(OnClickListener listener) { this.onClickListener = listener; }
 
     @NonNull

@@ -1,22 +1,32 @@
 package com.example.foodplannercalendar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupWindow;
+
+import com.example.foodplannercalendar.shoppinglist.InBasketListAdapter;
+import com.example.foodplannercalendar.shoppinglist.ShoppingListAdapter;
 import com.example.foodplannercalendar.shoppinglist.ShoppingListItem;
 import com.example.foodplannercalendar.shoppinglist.ShoppinglistFragment;
+import com.example.foodplannercalendar.shoppinglist.ShoppinglistFragmentViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
     private FirebaseAuth mAuth;
+    private ShoppinglistFragmentViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         toolbar = findViewById(R.id.toolbar);
         mAuth = FirebaseAuth.getInstance();
+        viewModel = new ViewModelProvider(this).get(ShoppinglistFragmentViewModel.class);
     }
 
     private void setupNavigation()
@@ -131,7 +143,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void ClearList(MenuItem item)
     {
-        ShoppinglistFragment fragment = (ShoppinglistFragment) getSupportFragmentManager().findFragmentById(R.id.shoppingListFragment);
-        fragment.clearLists();
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setCancelable(true);
+        builder.setTitle("Confirm delete");
+        builder.setMessage("Do you really want to empty your shoppinglist?").
+                setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                viewModel.deleteAllShoppingListItems();
+            }
+        }).setNegativeButton("Cancel", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
+
 }

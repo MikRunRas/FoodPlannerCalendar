@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CalendarUtils
 {
@@ -20,7 +21,7 @@ public class CalendarUtils
 
     public static String formattedTime(LocalTime time)
     {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss", Locale.UK);
         return time.format(formatter);
     }
 

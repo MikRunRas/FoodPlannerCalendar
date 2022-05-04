@@ -13,7 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.foodplannercalendar.R;
@@ -32,21 +34,16 @@ public class ShoppinglistFragment extends Fragment {
     private FloatingActionButton fabd;
     private EditText editText1;
     private EditText editText2;
-    private ShoppingListAdapter shoppingListAdapter;
-    private InBasketListAdapter basketListAdapter;
+    public ShoppingListAdapter shoppingListAdapter;
+    public InBasketListAdapter basketListAdapter;
     private ShoppinglistFragmentViewModel viewModel;
-    private int test = 1;
+    private LinearLayout shoppingListLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         viewModel = new ViewModelProvider(this).get(ShoppinglistFragmentViewModel.class);
         View root = inflater.inflate(R.layout.fragment_shoppinglist, container, false);
-
-
-        fab = root.findViewById(R.id.FloatingActionButton);
-        fabd = root.findViewById(R.id.FloatingActionButtond);
-        editText1 = root.findViewById(R.id.EditText);
-        editText2 = root.findViewById(R.id.EditText2);
+        findViews(root);
 
         viewModel.getAllShoppingListItems().observe(getViewLifecycleOwner(), tempItems-> {
             if(!tempItems.isEmpty()) {
@@ -83,11 +80,14 @@ public class ShoppinglistFragment extends Fragment {
                 editText2.setText("");
             }
         });
-
-        fabd.setOnClickListener(view -> {
-            viewModel.deleteAllShoppingListItems();
-        });
         return root;
+    }
+
+    private void findViews(View root) {
+        shoppingListLayout = root.findViewById(R.id.shoppingListLayout);
+        fab = root.findViewById(R.id.FloatingActionButton);
+        editText1 = root.findViewById(R.id.EditText);
+        editText2 = root.findViewById(R.id.EditText2);
     }
 
     @Override
@@ -126,6 +126,7 @@ public class ShoppinglistFragment extends Fragment {
         itemList.setAdapter(shoppingListAdapter);
         boughtItemsList.setAdapter(basketListAdapter);
     }
+
     public void clearLists(){
         ShoppinglistFragment shoppinglistFragment = new ShoppinglistFragment();
         shoppinglistFragment.items.clear();
