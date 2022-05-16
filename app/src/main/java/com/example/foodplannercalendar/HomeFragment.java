@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.foodplannercalendar.API.MealViewModel;
+import com.example.foodplannercalendar.WeeklyMealPlan.MealViewModel;
 import com.example.foodplannercalendar.WeeklyMealPlan.WeeklyMealPlanFragment;
 
 import java.time.LocalDateTime;
@@ -41,8 +40,8 @@ public class HomeFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(MealViewModel.class);
         viewModel.searchForRandomMeal();
         viewModel.getRandomMeal().observe(getViewLifecycleOwner(), meal -> {
-            Glide.with(this).load(meal.getImageUrl()).into(imageView);
-            mealTV.setText(meal.getName());
+            Glide.with(this).load(meal.strMealThumb()).into(imageView);
+            mealTV.setText(meal.getStrMeal());
         });
 
         weeklyMealPlanButton.setOnClickListener(view -> {

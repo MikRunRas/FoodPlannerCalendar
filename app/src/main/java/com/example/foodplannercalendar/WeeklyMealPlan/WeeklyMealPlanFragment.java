@@ -1,37 +1,26 @@
 package com.example.foodplannercalendar.WeeklyMealPlan;
 
-import static com.example.foodplannercalendar.calendar.CalendarUtils.daysInMonthArray;
 import static com.example.foodplannercalendar.calendar.CalendarUtils.daysInWeekArray;
 import static com.example.foodplannercalendar.calendar.CalendarUtils.monthYearFromDate;
 import static com.example.foodplannercalendar.calendar.CalendarUtils.selectedDate;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.foodplannercalendar.API.MealViewModel;
 import com.example.foodplannercalendar.R;
 import com.example.foodplannercalendar.calendar.CalendarAdapter;
-import com.example.foodplannercalendar.calendar.CalendarUtils;
-import com.example.foodplannercalendar.event.EventEditFragment;
-import com.example.foodplannercalendar.shoppinglist.ShoppingListAdapter;
-import com.example.foodplannercalendar.shoppinglist.ShoppingListItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.time.LocalDate;
@@ -40,24 +29,34 @@ import java.util.ArrayList;
 
 public class WeeklyMealPlanFragment extends Fragment implements CalendarAdapter.OnItemListener{
 
-    private ArrayList<WeeklyMealPlanItem> items = new ArrayList<>();
-    private WeeklyMealPlanViewModel viewModel;
+    private ArrayList<Meal> allMeals = new ArrayList<Meal>();
+    private ArrayList<Meal> dailyMeals;
+    private MealViewModel viewModel;
     private RecyclerView itemList;
     private ImageButton nextWeekButton;
     private ImageButton previousWeekButton;
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
+    private ListView mealListView;
     private FloatingActionButton newMealButton;
-    public WeeklyMealPlanAdapter weeklyMealPlanAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        viewModel = new ViewModelProvider(this).get(WeeklyMealPlanViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MealViewModel.class);
         View root = inflater.inflate(R.layout.fragment_weekly_meal_plan, container, false);
         findViews(root);
         setWeekView();
+
+        viewModel.getAllMeals().observe(getViewLifecycleOwner(), tempMeals -> {
+            if(!tempMeals.isEmpty()){
+                allMeals.clear();
+                for (Meal m : tempMeals){
+                    allMeals.add(m);
+                }
+            }
+        });
 
         nextWeekButton.setOnClickListener(view -> {
             selectedDate = selectedDate.plusWeeks(1);
@@ -77,15 +76,6 @@ public class WeeklyMealPlanFragment extends Fragment implements CalendarAdapter.
             ft.addToBackStack(null);
             ft.commit();
         });
-
-        viewModel.getAllItems().observe(getViewLifecycleOwner(), tempItems->{
-            if(!tempItems.isEmpty()){
-                items.clear();
-                for(WeeklyMealPlanItem i : tempItems){
-                    items.add(i);
-                }
-            }
-        });
         return root;
     }
 
@@ -97,6 +87,7 @@ public class WeeklyMealPlanFragment extends Fragment implements CalendarAdapter.
         selectedDate = LocalDate.now();
         previousWeekButton = root.findViewById(R.id.previousWeekButton);
         nextWeekButton = root.findViewById(R.id.nextWeekButton);
+        mealListView = root.findViewById(R.id.mealListView);
     }
 
     private void setWeekView()
@@ -104,13 +95,11 @@ public class WeeklyMealPlanFragment extends Fragment implements CalendarAdapter.
         String str = monthYearFromDate(selectedDate);
         monthYearText.setText(str.substring(0, 1).toUpperCase() + str.substring(1));
         ArrayList<LocalDate> days = daysInWeekArray(selectedDate);
-
-
         CalendarAdapter calendarAdapter = new CalendarAdapter(days, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
-        //setEventAdapter();
+        setMealAdapter();
     }
 
     public void onItemClick(int position, LocalDate date)
@@ -122,5 +111,17 @@ public class WeeklyMealPlanFragment extends Fragment implements CalendarAdapter.
         }
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        setMealAdapter();
+    }
+
+    private void setMealAdapter()
+    {
+        dailyMeals = Meal.mealsForDate(selectedDate.toString(), allMeals);
+        MealAdapter mealAdapter = new MealAdapter(getContext(), dailyMeals);
+        mealListView.setAdapter(mealAdapter);
+    }
 }
 

@@ -1,5 +1,7 @@
 package com.example.foodplannercalendar.API;
 
+import com.example.foodplannercalendar.WeeklyMealPlan.Meal;
+
 import java.util.List;
 
 public class MealResponse {

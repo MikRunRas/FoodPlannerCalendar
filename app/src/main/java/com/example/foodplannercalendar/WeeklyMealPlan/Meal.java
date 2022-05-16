@@ -1,8 +1,29 @@
-package com.example.foodplannercalendar.API;
+package com.example.foodplannercalendar.WeeklyMealPlan;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import java.util.ArrayList;
+
+@Entity(tableName = "meals_table")
 public class Meal {
 
+    public static ArrayList<Meal> mealsList = new ArrayList<>();
+
+    public static ArrayList<Meal> mealsForDate(String date, ArrayList<Meal> mealsList){
+        ArrayList<Meal> meals = new ArrayList<>();
+
+        for (Meal meal : mealsList){
+            if(meal.getDate().equals(date)){
+                meals.add(meal);
+            }
+        }
+        return meals;
+    }
+
+    @PrimaryKey(autoGenerate = true)
     private final int idMeal;
+    private final String date;
     private final String strMeal;
     private final String strCategory;
     private final String strInstructions;
@@ -48,7 +69,7 @@ public class Meal {
     private final String strMeasure20;
     private final String strMealThumb;
 
-    public Meal(int idMeal, String strMeal, String strCategory, String strInstructions, String strIngredient1, String strIngredient2, String strIngredient3,
+    public Meal(int idMeal, String date, String strMeal, String strCategory, String strInstructions, String strIngredient1, String strIngredient2, String strIngredient3,
                 String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8,
                 String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13,
                 String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18,
@@ -57,6 +78,7 @@ public class Meal {
                 String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18,
                 String strMeasure19, String strMeasure20, String strMealThumb){
         this.idMeal = idMeal;
+        this.date = date;
         this.strMeal = strMeal;
         this.strCategory = strCategory;
         this.strInstructions = strInstructions;
@@ -105,13 +127,95 @@ public class Meal {
 
     public int getIdMeal(){return idMeal; }
 
-    public String getName(){ return strMeal; }
+    public String getDate(){ return date; }
 
-    public String getCategory(){ return strCategory; }
+    public String getStrMeal(){ return strMeal; }
 
-    public String getInstructions(){ return strInstructions; }
+    public String strCategory(){ return strCategory; }
 
-    public String getImageUrl() { return strMealThumb; }
+    public String strInstructions(){ return strInstructions; }
+
+    public String strMealThumb() { return strMealThumb; }
+
+    public String getStrIngredient1() {return strIngredient1; }
+
+    public String getStrIngredient2() {return strIngredient2; }
+
+    public String getStrIngredient3() {return strIngredient3; }
+
+    public String getStrIngredient4() {return strIngredient4; }
+
+    public String getStrIngredient5() {return strIngredient5; }
+
+    public String getStrIngredient6() {return strIngredient6; }
+
+    public String getStrIngredient7() {return strIngredient7; }
+
+    public String getStrIngredient8() {return strIngredient8; }
+
+    public String getStrIngredient9() {return strIngredient9; }
+
+    public String getStrIngredient10() {return strIngredient10; }
+
+    public String getStrIngredient11() {return strIngredient11; }
+
+    public String getStrIngredient12() {return strIngredient12; }
+
+    public String getStrIngredient13() {return strIngredient13; }
+
+    public String getStrIngredient14() {return strIngredient14; }
+
+    public String getStrIngredient15() {return strIngredient15; }
+
+    public String getStrIngredient16() {return strIngredient16; }
+
+    public String getStrIngredient17() {return strIngredient17; }
+
+    public String getStrIngredient18() {return strIngredient18; }
+
+    public String getStrIngredient19() {return strIngredient19; }
+
+    public String getStrIngredient20() {return strIngredient20; }
+
+    public String getStrMeasure1() {return strMeasure1; }
+
+    public String getStrMeasure2() {return strMeasure2; }
+
+    public String getStrMeasure3() {return strMeasure3; }
+
+    public String getStrMeasure4() {return strMeasure4; }
+
+    public String getStrMeasure5() {return strMeasure5; }
+
+    public String getStrMeasure6() {return strMeasure6; }
+
+    public String getStrMeasure7() {return strMeasure7; }
+
+    public String getStrMeasure8() {return strMeasure8; }
+
+    public String getStrMeasure9() {return strMeasure9; }
+
+    public String getStrMeasure10() {return strMeasure10; }
+
+    public String getStrMeasure11() {return strMeasure11; }
+
+    public String getStrMeasure12() {return strMeasure12; }
+
+    public String getStrMeasure13() {return strMeasure13; }
+
+    public String getStrMeasure14() {return strMeasure14; }
+
+    public String getStrMeasure15() {return strMeasure15; }
+
+    public String getStrMeasure16() {return strMeasure16; }
+
+    public String getStrMeasure17() {return strMeasure17; }
+
+    public String getStrMeasure18() {return strMeasure18; }
+
+    public String getStrMeasure19() {return strMeasure19; }
+
+    public String getStrMeasure20() {return strMeasure20; }
 
     public String getAllIngredients(){ return strIngredient1 + " " + strMeasure1 + ", " + strIngredient2 + " " + strMeasure2 + ", " +
                                               strIngredient3 + " " + strMeasure3 + ", " + strIngredient4 + " " + strMeasure4 + ", " +
