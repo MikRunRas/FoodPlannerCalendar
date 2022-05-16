@@ -31,7 +31,6 @@ public class ShoppinglistFragment extends Fragment {
     private RecyclerView itemList;
     private RecyclerView boughtItemsList;
     private FloatingActionButton fab;
-    private FloatingActionButton fabd;
     private EditText editText1;
     private EditText editText2;
     public ShoppingListAdapter shoppingListAdapter;
@@ -125,11 +124,5 @@ public class ShoppinglistFragment extends Fragment {
         });
         itemList.setAdapter(shoppingListAdapter);
         boughtItemsList.setAdapter(basketListAdapter);
-    }
-
-    public void clearLists(){
-        ShoppinglistFragment shoppinglistFragment = new ShoppinglistFragment();
-        shoppinglistFragment.items.clear();
-        boughtItems.clear();
     }
 }

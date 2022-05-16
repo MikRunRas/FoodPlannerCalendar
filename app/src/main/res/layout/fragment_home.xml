@@ -13,11 +13,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Todays date is:"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:layout_weight="1"
             android:layout_gravity="center"/>
         <TextView
             android:id="@+id/dateTV"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="date"
@@ -28,21 +30,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Todays meal is:"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:layout_weight="1"
             android:layout_gravity="center"/>
         <TextView
+            android:id="@+id/mealTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MEAL"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:textSize="20sp"
             android:layout_weight="1"
             android:layout_gravity="center"/>
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/rounded_corner"
+            android:id="@+id/mealImage"/>
         <Button
+            android:id="@+id/weeklyMealPlanButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="SHOW ME THE RECIPE" />
+            android:text="Weekly Mealplan" />
     </LinearLayout>
 </LinearLayout>

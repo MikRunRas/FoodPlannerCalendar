@@ -1,5 +1,7 @@
 package com.example.foodplannercalendar;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private void findViews()
     {
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationDrawer = findViewById(R.id.navigation_drawer);
+        //navigationDrawer = findViewById(R.id.navigation_drawer);
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         toolbar = findViewById(R.id.toolbar);
         mAuth = FirebaseAuth.getInstance();
@@ -74,12 +76,14 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_home,
                 R.id.nav_calendar,
                 R.id.nav_shoppinglist)
-                .setOpenableLayout(drawerLayout)
                 .build();
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
-        NavigationUI.setupWithNavController(navigationDrawer, navController);
+        //NavigationUI.setupWithNavController(navigationDrawer, navController);
         setBottomNavigationVisibility();
     }
 
@@ -96,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
+        return super.onSupportNavigateUp();
     }
 
     @Override
@@ -122,8 +126,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

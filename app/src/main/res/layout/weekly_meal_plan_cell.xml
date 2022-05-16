@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/parentView2"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/weeklyMealPlanDay"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:text="DAY"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@color/black">
+        </TextView>
+        <ImageView
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:layout_marginLeft="5dp"/>
+        <ImageView
+            android:id="@+id/weeklyMealImage"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:src="@color/black"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/weeklyMealTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="RECIPE NAME"
+            android:gravity="center"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"/>
+</LinearLayout>

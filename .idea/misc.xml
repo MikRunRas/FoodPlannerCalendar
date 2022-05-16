@@ -11,7 +11,7 @@
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/drawable/rounded_corner_divider.xml" value="0.1095" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/drawable/rounded_corner_is_bought.xml" value="0.1095" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/activity_create_event.xml" value="0.14722222222222223" />
-        <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/activity_main.xml" value="0.33248081841432225" />
+        <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/calendar_cell.xml" value="0.3625" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/event_celk.xml" value="0.3625" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/event_cell.xml" value="0.3625" />
@@ -20,17 +20,21 @@
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/fragment_event_edit.xml" value="0.1828125" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/fragment_first.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/fragment_meal_creator.xml" value="0.25" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/fragment_shoppinglist.xml" value="0.25" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/fragment_weekly_calendar_view.xml" value="0.1828125" />
+        <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/fragment_weekly_meal_plan.xml" value="0.33" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/in_basket_list_layout.xml" value="0.3469387755102041" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/login_screen.xml" value="0.1828125" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/navigation_drawer_header.xml" value="0.3625" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/shoppinglist_layout.xml" value="0.15" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/sign_up_screen.xml" value="0.1828125" />
+        <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/layout/weekly_meal_plan_cell.xml" value="0.19114583333333332" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/menu/appbar.xml" value="0.3625" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/menu/bottom_nav.xml" value="0.3625" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/menu/navigation_drawer.xml" value="0.25" />
         <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/rasmu/AndroidStudioProjects/FoodPlannerCalendar/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
     </option>
   </component>

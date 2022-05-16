@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -40,23 +41,17 @@ public class EventEditFragment extends Fragment {
     private Button saveEventButton;
     private Button datePickerButton;
     private Button selectTimeButton;
+    private EventFragmentViewModel viewModel;
     int hour, minute;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        viewModel = new ViewModelProvider(this).get(EventFragmentViewModel.class);
         View root = inflater.inflate(R.layout.fragment_create_event, container, false);
 
-        eventNameET = root.findViewById(R.id.eventNameET);
-        eventDateTV = root.findViewById(R.id.eventDateTV);
-        saveEventButton = root.findViewById(R.id.saveEventButton);
-        datePickerButton = root.findViewById(R.id.datePickerButton);
-        selectTimeButton = root.findViewById(R.id.selectTimeButton);
-        datePickerButton.setText(makeDateString(selectedDate.getDayOfMonth(), selectedDate.getMonthValue(), selectedDate.getYear()).toString());
+        findViews(root);
         initDatePicker();
-
-        Log.d("testing", selectTimeButton.getText().toString());
 
         saveEventButton.setOnClickListener(view ->{
             if(TextUtils.isEmpty(eventNameET.getText().toString())){
@@ -66,9 +61,8 @@ public class EventEditFragment extends Fragment {
                 Toast.makeText(getContext(), "Time cannot be empty", Toast.LENGTH_LONG).show();
             }
             else {
-                String eventName = eventNameET.getText().toString();
-                Event newEvent = new Event(eventNameET.getText().toString(), formatLocalDate(datePickerButton.getText().toString()), formatLocalTime(selectTimeButton.getText().toString()));
-                Event.eventsList.add(newEvent);
+                Event newEvent = new Event(eventNameET.getText().toString(), formatLocalDate(datePickerButton.getText().toString()), selectTimeButton.getText().toString());
+                viewModel.insert(newEvent);
                 Fragment frag = new CalendarFragment();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.nav_host_fragment, frag);
@@ -101,14 +95,16 @@ public class EventEditFragment extends Fragment {
         return root;
     }
 
-    private LocalTime formatLocalTime(String time)
-    {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("H:mm");
-        LocalTime eventTime = LocalTime.parse(time,dateTimeFormatter);
-        return eventTime;
+    private void findViews(View root) {
+        eventNameET = root.findViewById(R.id.eventNameET);
+        eventDateTV = root.findViewById(R.id.eventDateTV);
+        saveEventButton = root.findViewById(R.id.saveEventButton);
+        datePickerButton = root.findViewById(R.id.datePickerButton);
+        selectTimeButton = root.findViewById(R.id.selectTimeButton);
+        datePickerButton.setText(makeDateString(selectedDate.getDayOfMonth(), selectedDate.getMonthValue(), selectedDate.getYear()).toString());
     }
 
-    private LocalDate formatLocalDate(String text)
+    private String formatLocalDate(String text)
     {
 
         String[] split = text.split(" ");
@@ -188,12 +184,9 @@ public class EventEditFragment extends Fragment {
                 day = day;
         }
 
-        String actualDate = day + "/" + month + "/" + year;
-        Log.d("test", text);
-        Log.d("test2", actualDate.toString());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate eventDate = LocalDate.parse(actualDate,formatter);
-        return eventDate;
+        String actualDate = year + "-" + month + "-" + day;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return actualDate;
     }
 
     private void initDatePicker()
