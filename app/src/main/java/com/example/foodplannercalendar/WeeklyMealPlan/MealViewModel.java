@@ -31,7 +31,13 @@ public class MealViewModel extends AndroidViewModel {
 
     public LiveData<Meal> getRandomMeal() { return repository.getRandomMeal();}
 
+    public LiveData<Meal> getMealByCategory() { return repository.getMealByCategory();}
+
     public void searchForRandomMeal() {
         repository.searchForRandomMeal();
+    }
+
+    public void searchMealByCategory(String category){
+        repository.searchMealByCategory(category);
     }
 }

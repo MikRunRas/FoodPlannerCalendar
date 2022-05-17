@@ -24,6 +24,7 @@ public class MealRepository {
     private static MealRepository instance;
     private final LiveData<List<Meal>> allMeals;
     private final MutableLiveData<Meal> randomMeal;
+    private final MutableLiveData<Meal> mealByCategory;
     private ExecutorService executorService;
 
     private MealRepository(Application application) {
@@ -31,6 +32,7 @@ public class MealRepository {
         mealDao = database.mealDao();
         allMeals = mealDao.getAllMeals();
         randomMeal = new MutableLiveData<>();
+        mealByCategory = new MutableLiveData<>();
         executorService = Executors.newFixedThreadPool(1);
     }
 
@@ -43,6 +45,8 @@ public class MealRepository {
 
     public LiveData<Meal> getRandomMeal() { return randomMeal; }
 
+    public LiveData<Meal> getMealByCategory() { return mealByCategory; }
+
     public void searchForRandomMeal(){
         MealApi mealApi = ServiceGenerator.getMealApi();
         Call<MealResponse> call = mealApi.getRandomMeal();
@@ -53,6 +57,26 @@ public class MealRepository {
                if (response.isSuccessful()) {
                    Log.d("TAG", "Success!\n" + response + "\n" + response.body().getMeal());
                     randomMeal.setValue(response.body().getMeal());
+                }
+            }
+            @EverythingIsNonNull
+            @Override
+            public void onFailure(Call<MealResponse> call, Throwable t) {
+                Log.i("Retrofit", "Something went wrong :(\n" + t);
+            }
+        });
+    }
+
+    public void searchMealByCategory(String category){
+        MealApi mealApi = ServiceGenerator.getMealApi();
+        Call<MealResponse> call = mealApi.getMealByCategory(category);
+        call.enqueue(new Callback<MealResponse>() {
+            @EverythingIsNonNull
+            @Override
+            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
+                if (response.isSuccessful()) {
+                    Log.d("TAG", "Success!\n" + response + "\n" + response.body().getMeal());
+                    mealByCategory.setValue(response.body().getMeal());
                 }
             }
             @EverythingIsNonNull

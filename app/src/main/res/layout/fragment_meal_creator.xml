@@ -41,17 +41,36 @@
             style="?android:spinnerStyle"
             />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/generateNewMeal"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Im feeling lucky"
-        android:textSize="15sp"
-        android:textAlignment="center"
-        android:textColor="@color/black"/>
+        android:orientation="horizontal">
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/searchByCategoryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="search by category"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/generateNewMeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Im feeling lucky"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+
 
     <TextView
         android:id="@+id/mealNameTV"

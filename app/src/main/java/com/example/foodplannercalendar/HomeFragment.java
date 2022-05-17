@@ -5,8 +5,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +17,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodplannercalendar.WeeklyMealPlan.Meal;
 import com.example.foodplannercalendar.WeeklyMealPlan.MealViewModel;
 import com.example.foodplannercalendar.WeeklyMealPlan.WeeklyMealPlanFragment;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomeFragment extends Fragment {
 
     private TextView dateTV;
+    private ArrayList<Meal> allMeals = new ArrayList<Meal>();
     private ImageView imageView;
     private MealViewModel viewModel;
     private Button weeklyMealPlanButton;
@@ -38,10 +44,31 @@ public class HomeFragment extends Fragment {
         mealTV = root.findViewById(R.id.mealTextView);
         weeklyMealPlanButton = root.findViewById(R.id.weeklyMealPlanButton);
         viewModel = new ViewModelProvider(this).get(MealViewModel.class);
-        viewModel.searchForRandomMeal();
+        /*viewModel.searchForRandomMeal();
         viewModel.getRandomMeal().observe(getViewLifecycleOwner(), meal -> {
             Glide.with(this).load(meal.strMealThumb()).into(imageView);
             mealTV.setText(meal.getStrMeal());
+        });*/
+        viewModel.getAllMeals().observe(getViewLifecycleOwner(), tempMeals -> {
+            if (!tempMeals.isEmpty()) {
+                allMeals.clear();
+                for (Meal m : tempMeals) {
+                    allMeals.add(m);
+                }
+                for(Meal m : allMeals){
+                    if(m.getDate().equals(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now()))){
+                        Glide.with(getContext()).load(m.strMealThumb()).into(imageView);
+                        mealTV.setText(m.getStrMeal());
+                    } else if(!m.getDate().equals(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now()))){
+                        if(mealTV.equals("")) {
+                            mealTV.setText("Empty!\nGo to your weekly mealplan to add a meal!");
+                        } else{
+
+                        }
+                    }
+                }
+
+        }
         });
 
         weeklyMealPlanButton.setOnClickListener(view -> {

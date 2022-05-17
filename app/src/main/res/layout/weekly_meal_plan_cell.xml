@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal">
-
         <TextView
             android:id="@+id/weeklyMealPlanDay"
             android:layout_width="wrap_content"

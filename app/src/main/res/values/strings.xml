@@ -11,4 +11,16 @@
     <string name="menu_help_and_feedback">Help and feedback</string>
     <string name="forward"><![CDATA[->]]></string>
     <string name="backward"><![CDATA[<-]]></string>
+
+    <string-array name="categories">
+        <item>Beef</item>
+        <item>Chicken</item>
+        <item>Lamb</item>
+        <item>Pasta</item>
+        <item>Pork</item>
+        <item>Seafood</item>
+        <item>Vegan</item>
+        <item>Vegetarian</item>
+        <item>Dessert</item>
+    </string-array>
 </resources>

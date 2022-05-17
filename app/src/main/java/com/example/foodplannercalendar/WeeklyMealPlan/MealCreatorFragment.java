@@ -14,9 +14,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +40,8 @@ public class MealCreatorFragment extends Fragment {
     private Button generateNewMeal;
     private Button saveMealButton;
     private Meal newMeal;
+    private Spinner spinner;
+    private Button searchByCategoryButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,10 +92,38 @@ public class MealCreatorFragment extends Fragment {
             }
         });
 
+        searchByCategoryButton.setOnClickListener(view -> {
+            String category = spinner.getSelectedItem().toString();
+            viewModel = new ViewModelProvider(this).get(MealViewModel.class);
+            viewModel.searchMealByCategory(category);
+            viewModel.getMealByCategory().observe(getViewLifecycleOwner(), meal -> {
+                Glide.with(this).load(meal.strMealThumb()).into(imageView);
+                mealNameTV.setText(meal.getStrMeal());
+                newMeal = new Meal(meal.getIdMeal(), formatLocalDate(datePickerButton.getText().toString()), meal.getStrMeal(), meal.strCategory(), meal.strInstructions(),
+                        meal.getStrIngredient1(), meal.getStrIngredient2(), meal.getStrIngredient3(),
+                        meal.getStrIngredient4(), meal.getStrIngredient5(), meal.getStrIngredient6(),
+                        meal.getStrIngredient7(), meal.getStrIngredient8(), meal.getStrIngredient9(),
+                        meal.getStrIngredient10(), meal.getStrIngredient11(), meal.getStrIngredient12(),
+                        meal.getStrIngredient13(), meal.getStrIngredient14(), meal.getStrIngredient15(),
+                        meal.getStrIngredient16(), meal.getStrIngredient17(), meal.getStrIngredient18(),
+                        meal.getStrIngredient19(), meal.getStrIngredient20(), meal.getStrMeasure1(),
+                        meal.getStrMeasure2(), meal.getStrMeasure3(), meal.getStrMeasure4(), meal.getStrMeasure5(),
+                        meal.getStrMeasure6(),meal.getStrMeasure7(),meal.getStrMeasure8(),meal.getStrMeasure9(),
+                        meal.getStrMeasure10(),meal.getStrMeasure11(),meal.getStrMeasure12(),meal.getStrMeasure13(),
+                        meal.getStrMeasure14(),meal.getStrMeasure15(),meal.getStrMeasure16(),meal.getStrMeasure17(),
+                        meal.getStrMeasure18(),meal.getStrMeasure19(),meal.getStrMeasure20(), meal.strMealThumb());
+            });
+        });
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.categories, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
         return root;
     }
 
     private void findViews(View root) {
+        searchByCategoryButton = root.findViewById(R.id.searchByCategoryButton);
+        spinner = root.findViewById(R.id.spinner);
         saveMealButton = root.findViewById(R.id.saveMealButton);
         mealNameTV = root.findViewById(R.id.mealNameTV);
         datePickerButton = root.findViewById(R.id.datePickerButton);
