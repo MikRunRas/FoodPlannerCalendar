@@ -18,6 +18,7 @@ import java.util.List;
 
 public class MealAdapter extends ArrayAdapter<Meal> {
     public MealAdapter(@NonNull Context context, List<Meal> meals) {
+
         super(context, 0, meals);
     }
 

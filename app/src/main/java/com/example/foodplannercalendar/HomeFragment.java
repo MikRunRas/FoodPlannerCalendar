@@ -35,6 +35,7 @@ public class HomeFragment extends Fragment {
     private MealViewModel viewModel;
     private Button weeklyMealPlanButton;
     private TextView mealTV;
+    private Meal todaysMeal;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -57,6 +58,7 @@ public class HomeFragment extends Fragment {
                 }
                 for(Meal m : allMeals){
                     if(m.getDate().equals(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now()))){
+                        todaysMeal = m;
                         Glide.with(getContext()).load(m.strMealThumb()).into(imageView);
                         mealTV.setText(m.getStrMeal());
                     } else if(!m.getDate().equals(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now()))){
@@ -69,6 +71,15 @@ public class HomeFragment extends Fragment {
                 }
 
         }
+        });
+
+        imageView.setOnClickListener(view -> {
+            Fragment frag = new RecipeFragment(todaysMeal);
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.nav_host_fragment, frag);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(null);
+            ft.commit();
         });
 
         weeklyMealPlanButton.setOnClickListener(view -> {

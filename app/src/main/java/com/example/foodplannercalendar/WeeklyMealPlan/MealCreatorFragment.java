@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -25,14 +27,17 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.foodplannercalendar.R;
+import com.example.foodplannercalendar.shoppinglist.ShoppingListItem;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
 public class MealCreatorFragment extends Fragment {
 
     private Button datePickerButton;
+    private ArrayList<Meal> meals = new ArrayList<>();
     private DatePickerDialog datePickerDialog;
     private MealViewModel viewModel;
     private ImageView imageView;
@@ -113,6 +118,15 @@ public class MealCreatorFragment extends Fragment {
                         meal.getStrMeasure14(),meal.getStrMeasure15(),meal.getStrMeasure16(),meal.getStrMeasure17(),
                         meal.getStrMeasure18(),meal.getStrMeasure19(),meal.getStrMeasure20(), meal.strMealThumb());
             });
+        });
+        viewModel = new ViewModelProvider(this).get(MealViewModel.class);
+        viewModel.getAllMeals().observe(getViewLifecycleOwner(), tempMeals ->{
+            if(!tempMeals.isEmpty()) {
+                meals.clear();
+                for (Meal m : tempMeals) {
+                    meals.add(m);
+                }
+            }
         });
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.categories, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);

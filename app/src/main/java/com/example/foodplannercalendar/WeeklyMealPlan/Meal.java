@@ -1,9 +1,12 @@
 package com.example.foodplannercalendar.WeeklyMealPlan;
 
+import android.util.Log;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity(tableName = "meals_table")
 public class Meal {
@@ -217,15 +220,66 @@ public class Meal {
 
     public String getStrMeasure20() {return strMeasure20; }
 
-    public String getAllIngredients(){ return strIngredient1 + " " + strMeasure1 + ", " + strIngredient2 + " " + strMeasure2 + ", " +
-                                              strIngredient3 + " " + strMeasure3 + ", " + strIngredient4 + " " + strMeasure4 + ", " +
-                                              strIngredient5 + " " + strMeasure5 + ", " + strIngredient6 + " " + strMeasure6 + ", " +
-                                              strIngredient7 + " " + strMeasure7 + ", " + strIngredient8 + " " + strMeasure8 + ", " +
-                                              strIngredient9 + " " + strMeasure9 + ", " + strIngredient10 + " " + strMeasure10 + ", " +
-                                              strIngredient11 + " " + strMeasure11 + ", " + strIngredient12 + " " + strMeasure12 + ", " +
-                                              strIngredient13 + " " + strMeasure13 + ", " + strIngredient14 + " " + strMeasure14 + ", " +
-                                              strIngredient15 + " " + strMeasure15 + ", " + strIngredient16 + " " + strMeasure16 + ", " +
-                                              strIngredient17 + " " + strMeasure17 + ", " + strIngredient18 + " " + strMeasure18 + ", " +
-                                              strIngredient19 + " " + strMeasure19 + ", " + strIngredient20 + " " + strMeasure20;}
+    public String getAllIngredients() {
+        ArrayList<String> ingredients = new ArrayList<String>();
 
+        ingredients.add(strIngredient1);
+        ingredients.add(strMeasure1);
+        ingredients.add(strIngredient2);
+        ingredients.add(strMeasure2);
+        ingredients.add(strIngredient3);
+        ingredients.add(strMeasure3);
+        ingredients.add(strIngredient4);
+        ingredients.add(strMeasure4);
+        ingredients.add(strIngredient5);
+        ingredients.add(strMeasure5);
+        ingredients.add(strIngredient6);
+        ingredients.add(strMeasure6);
+        ingredients.add(strIngredient7);
+        ingredients.add(strMeasure7);
+        ingredients.add(strIngredient8);
+        ingredients.add(strMeasure8);
+        ingredients.add(strIngredient9);
+        ingredients.add(strMeasure9);
+        ingredients.add(strIngredient10);
+        ingredients.add(strMeasure10);
+        ingredients.add(strIngredient11);
+        ingredients.add(strMeasure11);
+        ingredients.add(strIngredient12);
+        ingredients.add(strMeasure12);
+        ingredients.add(strIngredient13);
+        ingredients.add(strMeasure13);
+        ingredients.add(strIngredient14);
+        ingredients.add(strMeasure14);
+        ingredients.add(strIngredient15);
+        ingredients.add(strMeasure15);
+        ingredients.add(strIngredient16);
+        ingredients.add(strMeasure16);
+        ingredients.add(strIngredient17);
+        ingredients.add(strMeasure17);
+        ingredients.add(strIngredient18);
+        ingredients.add(strMeasure18);
+        ingredients.add(strIngredient19);
+        ingredients.add(strMeasure19);
+        ingredients.add(strIngredient20);
+        ingredients.add(strMeasure20);
+
+        String allIngredients = "";
+        int counter = 0;
+        for (String s : ingredients) {
+            if (s.length() > 0) {
+                if(counter % 2 == 0) {
+                    allIngredients = allIngredients + s + " ";
+                    counter++;
+                }
+                else{
+                    if (counter % 2 == 1) {
+                        allIngredients = allIngredients + s + "\n";
+                        counter++;
+                    }
+                }
+            }
+        }
+        return allIngredients;
+    }
 }

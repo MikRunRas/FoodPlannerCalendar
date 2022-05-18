@@ -12,14 +12,18 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.foodplannercalendar.R;
+import com.example.foodplannercalendar.RecipeFragment;
 import com.example.foodplannercalendar.calendar.CalendarAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -32,7 +36,6 @@ public class WeeklyMealPlanFragment extends Fragment implements CalendarAdapter.
     private ArrayList<Meal> allMeals = new ArrayList<Meal>();
     private ArrayList<Meal> dailyMeals;
     private MealViewModel viewModel;
-    private RecyclerView itemList;
     private ImageButton nextWeekButton;
     private ImageButton previousWeekButton;
     private TextView monthYearText;
@@ -75,6 +78,20 @@ public class WeeklyMealPlanFragment extends Fragment implements CalendarAdapter.
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(null);
             ft.commit();
+        });
+
+        mealListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Meal m = (Meal) mealListView.getItemAtPosition(position);
+                Log.d("Click", m.getStrMeal());
+                Fragment frag = new RecipeFragment(m);
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.nav_host_fragment, frag);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
         });
         return root;
     }

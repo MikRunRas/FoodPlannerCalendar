@@ -45,7 +45,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     private ListView eventListView;
     private ArrayList<Event> dailyEvents;
     private ArrayList<Event> allEvents = new ArrayList<Event>();
-    private ImageView eventNotifier;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -93,7 +92,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         newEventButton = root.findViewById(R.id.newEventButton);
         cellDay = root.findViewById(R.id.cellDayText);
         eventListView = root.findViewById(R.id.eventListView);
-        eventNotifier = root.findViewById(R.id.eventNotifier);
     }
 
     private void setMonthView()
