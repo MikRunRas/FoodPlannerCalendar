@@ -19,3 +19,8 @@ As such, my application will have the following requirements:
 5. Share your calendar and shopping list.
 6. Create a family, letting all members of the family edit a shopping list or food plan.
 7. Let the user specify what they already have in their fridge, making the shoppinglist adapt to this.
+
+
+Link to my youtube presentation:
+
+https://youtu.be/Jog_XFbS9K8
