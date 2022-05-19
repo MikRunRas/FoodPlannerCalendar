@@ -11,8 +11,6 @@ import java.util.List;
 @Entity(tableName = "meals_table")
 public class Meal {
 
-    public static ArrayList<Meal> mealsList = new ArrayList<>();
-
     public static ArrayList<Meal> mealsForDate(String date, ArrayList<Meal> mealsList){
         ArrayList<Meal> meals = new ArrayList<>();
 

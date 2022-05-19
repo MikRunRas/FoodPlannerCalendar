@@ -285,7 +285,6 @@ public class MealCreatorFragment extends Fragment {
         }
 
         String actualDate = year + "-" + month + "-" + day;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return actualDate;
     }
 

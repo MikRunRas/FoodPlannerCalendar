@@ -20,6 +20,8 @@ import com.bumptech.glide.Glide;
 import com.example.foodplannercalendar.WeeklyMealPlan.Meal;
 import com.example.foodplannercalendar.WeeklyMealPlan.MealViewModel;
 import com.example.foodplannercalendar.WeeklyMealPlan.WeeklyMealPlanFragment;
+import com.example.foodplannercalendar.shoppinglist.InBasketListAdapter;
+import com.example.foodplannercalendar.shoppinglist.ShoppingListAdapter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -45,11 +47,6 @@ public class HomeFragment extends Fragment {
         mealTV = root.findViewById(R.id.mealTextView);
         weeklyMealPlanButton = root.findViewById(R.id.weeklyMealPlanButton);
         viewModel = new ViewModelProvider(this).get(MealViewModel.class);
-        /*viewModel.searchForRandomMeal();
-        viewModel.getRandomMeal().observe(getViewLifecycleOwner(), meal -> {
-            Glide.with(this).load(meal.strMealThumb()).into(imageView);
-            mealTV.setText(meal.getStrMeal());
-        });*/
         viewModel.getAllMeals().observe(getViewLifecycleOwner(), tempMeals -> {
             if (!tempMeals.isEmpty()) {
                 allMeals.clear();
@@ -85,7 +82,7 @@ public class HomeFragment extends Fragment {
         weeklyMealPlanButton.setOnClickListener(view -> {
             Fragment frag = new WeeklyMealPlanFragment();
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.nav_host_fragment, frag);
+            ft.replace(R.id.nav_host_fragment, frag).addToBackStack("tag");
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(null);
             ft.commit();

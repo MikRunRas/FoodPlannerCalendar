@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupWindow;
 
+import com.example.foodplannercalendar.WeeklyMealPlan.WeeklyMealPlanFragment;
 import com.example.foodplannercalendar.shoppinglist.InBasketListAdapter;
 import com.example.foodplannercalendar.shoppinglist.ShoppingListAdapter;
 import com.example.foodplannercalendar.shoppinglist.ShoppingListItem;
@@ -42,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<ShoppingListItem> boughtItems = new ArrayList<>();
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationDrawer;
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
     private FirebaseAuth mAuth;
@@ -59,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void findViews()
     {
-        drawerLayout = findViewById(R.id.drawer_layout);
-        //navigationDrawer = findViewById(R.id.navigation_drawer);
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         toolbar = findViewById(R.id.toolbar);
         mAuth = FirebaseAuth.getInstance();
@@ -77,13 +75,12 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_calendar,
                 R.id.nav_shoppinglist)
                 .build();
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
-        //NavigationUI.setupWithNavController(navigationDrawer, navController);
         setBottomNavigationVisibility();
     }
 
@@ -105,9 +102,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START))
-            drawerLayout.closeDrawer(GravityCompat.START);
-        else
             super.onBackPressed();
     }
 

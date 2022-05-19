@@ -36,13 +36,12 @@ public class EventEditFragment extends Fragment {
 
     private EditText eventNameET;
     private TextView eventDateTV;
-    private TextView eventTimeTV;
     private DatePickerDialog datePickerDialog;
     private Button saveEventButton;
     private Button datePickerButton;
     private Button selectTimeButton;
     private EventFragmentViewModel viewModel;
-    int hour, minute;
+    private int hour, minute;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -185,7 +184,6 @@ public class EventEditFragment extends Fragment {
         }
 
         String actualDate = year + "-" + month + "-" + day;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return actualDate;
     }
 

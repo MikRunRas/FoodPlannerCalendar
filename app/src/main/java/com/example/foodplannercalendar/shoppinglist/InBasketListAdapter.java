@@ -20,7 +20,7 @@ public class InBasketListAdapter extends RecyclerView.Adapter<InBasketListAdapte
     private ArrayList<ShoppingListItem> itemsBought;
     private InBasketListAdapter.OnClickListener onClickListener;
 
-    InBasketListAdapter(ArrayList<ShoppingListItem> itemsBought) { this.itemsBought = itemsBought; }
+    public InBasketListAdapter(ArrayList<ShoppingListItem> itemsBought) { this.itemsBought = itemsBought; }
 
     public void setOnClickListener(InBasketListAdapter.OnClickListener listener) { this.onClickListener = listener; }
 

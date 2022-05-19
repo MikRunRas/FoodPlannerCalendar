@@ -40,7 +40,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     private ImageButton nextMonthButton;
     private ImageButton previousMonthButton;
     private FloatingActionButton newEventButton;
-    private TextView cellDay;
     private EventFragmentViewModel viewModel;
     private ListView eventListView;
     private ArrayList<Event> dailyEvents;
@@ -90,7 +89,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         nextMonthButton = root.findViewById(R.id.nextMonthButton);
         previousMonthButton = root.findViewById(R.id.previousMonthButton);
         newEventButton = root.findViewById(R.id.newEventButton);
-        cellDay = root.findViewById(R.id.cellDayText);
         eventListView = root.findViewById(R.id.eventListView);
     }
 

@@ -20,26 +20,23 @@ import com.example.foodplannercalendar.WeeklyMealPlan.Meal;
 public class RecipeFragment extends Fragment {
 
     private final Meal m;
-    TextView mealTitle;
-    ImageView mealImage;
-    TextView instructions;
-    TextView ingredients;
+    private TextView mealTitle;
+    private ImageView mealImage;
+    private TextView instructions;
+    private TextView ingredients;
 
     public RecipeFragment(Meal m) {
         this.m = m;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_recipe, container, false);
         findViews(root);
 
         mealTitle.setText(m.getStrMeal());
         Glide.with(getContext()).load(m.strMealThumb()).into(mealImage);
         instructions.setText(m.strInstructions());
-        String ingredientsString = m.getAllIngredients();
         ingredients.setText(m.getAllIngredients());
         return root;
     }
